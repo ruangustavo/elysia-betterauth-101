@@ -7,6 +7,7 @@ export const auth = betterAuth({
 	database: new Database("users.db"),
 	emailAndPassword: {
 		enabled: true,
+		autoSignIn: true,
 	},
 	plugins: [openAPI()],
 });

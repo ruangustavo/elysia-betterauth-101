@@ -3,10 +3,12 @@ import { fromTypes } from "@elysiajs/openapi/gen";
 import { Elysia } from "elysia";
 import z, { toJSONSchema } from "zod/v4";
 import { auth, OpenAPI } from "./auth";
+import { betterAuth } from "./plugins/better-auth";
 import { cors } from "./plugins/cors";
 import { userRepository } from "./user.repository";
 
 const app = new Elysia()
+	.use(betterAuth)
 	.use(cors)
 	.use(
 		openapi({
@@ -70,6 +72,15 @@ const app = new Elysia()
 				email: z.email(),
 				age: z.number().min(1).optional(),
 			}),
+		},
+	)
+	.get(
+		"/protected",
+		() => {
+			return "hello! you're accessing a protected route";
+		},
+		{
+			auth: true,
 		},
 	)
 	.listen(3000);
