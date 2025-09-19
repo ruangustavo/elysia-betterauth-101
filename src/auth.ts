@@ -11,6 +11,17 @@ export const auth = betterAuth({
 		enabled: true,
 		autoSignIn: true,
 	},
+	session: {
+		cookieCache: {
+			enabled: true,
+			maxAge: 5 * 60, // 5 minutes (btw, this is the default value, I've rewrited this to improve readability)
+		},
+	},
+	advanced: {
+		database: {
+			generateId: false,
+		},
+	},
 	plugins: [openAPI()],
 });
 

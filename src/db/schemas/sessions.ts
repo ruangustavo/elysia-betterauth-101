@@ -1,8 +1,11 @@
+import { randomUUIDv7 } from "bun";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { users } from "./users";
 
 export const sessions = sqliteTable("sessions", {
-	id: text("id").primaryKey(),
+	id: text("id")
+		.primaryKey()
+		.$defaultFn(() => randomUUIDv7()),
 	expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
 	token: text("token").notNull().unique(),
 	createdAt: integer("created_at", { mode: "timestamp" })
