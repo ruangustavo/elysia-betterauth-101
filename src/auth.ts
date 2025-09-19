@@ -1,10 +1,11 @@
-import Database from "bun:sqlite";
 import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { openAPI } from "better-auth/plugins";
+import { db } from "./db";
 
 export const auth = betterAuth({
 	basePath: "/auth",
-	database: new Database("users.db"),
+	database: drizzleAdapter(db, { provider: "sqlite", usePlural: true }),
 	emailAndPassword: {
 		enabled: true,
 		autoSignIn: true,
