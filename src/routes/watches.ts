@@ -17,7 +17,7 @@ export const watchesRoutes = new Elysia()
 			return watches;
 		},
 		{
-			auth: true,
+			requiredRole: "costumer",
 		},
 	)
 	.post(
@@ -33,7 +33,7 @@ export const watchesRoutes = new Elysia()
 			return status("Created", createdWatch);
 		},
 		{
-			auth: true,
+			requiredRole: "costumer",
 			body: z.object({
 				name: z.string().min(1),
 			}),
