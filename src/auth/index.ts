@@ -1,12 +1,24 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { openAPI } from "better-auth/plugins";
-import { db } from "./db";
-import schema from "./db/schemas";
+import { admin, createAuthMiddleware, openAPI } from "better-auth/plugins";
+import { db } from "../db";
+import schema from "../db/schemas";
+
+// For some reason stacktraces isn't displayed in betterAuth (prob a skill issue, I'm gonna research it better later)
+// This is after server generated a response and before to send it to the client
+const logStacktraceAfter = createAuthMiddleware(async (ctx) => {
+	const result = ctx.context.returned;
+	if (result instanceof Error) {
+		console.error(result.stack ?? result);
+	}
+});
 
 export const auth = betterAuth({
 	basePath: "/auth",
 	database: drizzleAdapter(db, { provider: "sqlite", usePlural: true, schema }),
+	hooks: {
+		after: logStacktraceAfter,
+	},
 	emailAndPassword: {
 		enabled: true,
 		autoSignIn: true,
@@ -22,7 +34,12 @@ export const auth = betterAuth({
 			generateId: false,
 		},
 	},
-	plugins: [openAPI()],
+	plugins: [
+		openAPI(),
+		admin({
+			defaultRole: "customer",
+		}),
+	],
 });
 
 let _schema: ReturnType<typeof auth.api.generateOpenAPISchema>;

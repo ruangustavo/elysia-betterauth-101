@@ -18,4 +18,14 @@ export const users = sqliteTable("users", {
 		.$defaultFn(() => new Date())
 		.$onUpdate(() => new Date())
 		.notNull(),
+	role: text("role", { enum: ["costumer", "watchmaker"] })
+		.default("costumer")
+		.notNull(),
+	banned: integer("banned", { mode: "boolean" }).default(false),
+	banReason: text("ban_reason"),
+	banExpires: integer("ban_expires", { mode: "timestamp" }),
 });
+
+export type UserSelect = typeof users.$inferSelect;
+
+export type Role = UserSelect["role"];

@@ -5,8 +5,8 @@
 		"dev": "bun --env-file=.env --watch run src/index.ts",
 		"typecheck": "tsc --noEmit",
 		"db:generate": "bunx --bun drizzle-kit generate",
-		"db:migrate": "bunx --bun drizzle-kit migrate",
-		"auth:generate": "bunx --bun @better-auth/cli generate"
+		"db:migrate": "npx drizzle-kit migrate",
+		"auth:generate": "bunx --bun @better-auth/cli generate --config ./src/auth --yes"
 	},
 	"dependencies": {
 		"@elysiajs/cors": "^1.4.0",
