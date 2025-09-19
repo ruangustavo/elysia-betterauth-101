@@ -2,7 +2,7 @@ import { openapi } from "@elysiajs/openapi";
 import { fromTypes } from "@elysiajs/openapi/gen";
 import { Elysia } from "elysia";
 import z, { toJSONSchema } from "zod/v4";
-import { auth } from "./auth";
+import { auth, OpenAPI } from "./auth";
 import { cors } from "./plugins/cors";
 import { userRepository } from "./user.repository";
 
@@ -17,6 +17,10 @@ const app = new Elysia()
 			),
 			mapJsonSchema: {
 				zod: toJSONSchema,
+			},
+			documentation: {
+				components: await OpenAPI.components,
+				paths: await OpenAPI.getPaths("/auth"),
 			},
 		}),
 	)
