@@ -1,0 +1,1 @@
+ALTER TABLE `watches` ADD `repair_status` text DEFAULT 'pending' NOT NULL;

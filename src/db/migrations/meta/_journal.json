@@ -15,6 +15,20 @@
       "when": 1758291187031,
       "tag": "0001_robust_shape",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1758297074372,
+      "tag": "0002_curly_angel",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1758297457391,
+      "tag": "0003_sharp_emma_frost",
+      "breakpoints": true
     }
   ]
 }

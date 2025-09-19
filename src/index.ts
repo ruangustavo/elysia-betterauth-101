@@ -3,12 +3,15 @@ import { fromTypes } from "@elysiajs/openapi/gen";
 import { Elysia } from "elysia";
 import { toJSONSchema } from "zod/v4";
 import { auth, OpenAPI } from "./auth";
-import { betterAuth } from "./plugins/better-auth";
+import { requiredRole } from "./plugins/better-auth";
 import { cors } from "./plugins/cors";
-import { watchesRoutes } from "./routes/watches";
+import {
+	watchesCustomersRoutes,
+	watchesWatchmakersRoutes,
+} from "./routes/watches";
 
 const app = new Elysia()
-	.use(betterAuth)
+	.use(requiredRole)
 	.use(cors)
 	.use(
 		openapi({
@@ -27,7 +30,8 @@ const app = new Elysia()
 		}),
 	)
 	.mount(auth.handler)
-	.use(watchesRoutes)
+	.use(watchesCustomersRoutes)
+	.use(watchesWatchmakersRoutes)
 	.listen(3000);
 
 console.log(

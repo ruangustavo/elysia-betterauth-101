@@ -10,4 +10,7 @@ export const watches = sqliteTable("watches", {
 	userId: text("user_id")
 		.notNull()
 		.references(() => users.id, { onDelete: "cascade" }),
+	repairStatus: text("repair_status", { enum: ["pending", "completed"] })
+		.notNull()
+		.default("pending"),
 });
