@@ -5,6 +5,7 @@ import { toJSONSchema } from 'zod/v4'
 import { auth, OpenAPI } from './auth'
 import { requiredRole } from './plugins/better-auth'
 import { cors } from './plugins/cors'
+import { organizationsRoutes } from './routes/organizations'
 import {
   watchesCustomersRoutes,
   watchesWatchmakersRoutes,
@@ -32,6 +33,7 @@ const app = new Elysia()
   .mount(auth.handler)
   .use(watchesCustomersRoutes)
   .use(watchesWatchmakersRoutes)
+  .use(organizationsRoutes)
   .listen(3000)
 
 console.log(
