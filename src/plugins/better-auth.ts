@@ -19,8 +19,6 @@ export const requiredRole = new Elysia({
 
       const roles = Array.isArray(expectedRole) ? expectedRole : [expectedRole]
 
-      console.log({ roles, role })
-
       if (!roles.includes(role as Role)) {
         return status('Forbidden')
       }
