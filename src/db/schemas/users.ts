@@ -18,9 +18,7 @@ export const users = sqliteTable('users', {
     .$defaultFn(() => new Date())
     .$onUpdate(() => new Date())
     .notNull(),
-  role: text('role', { enum: ['customer', 'watchmaker'] })
-    .default('customer')
-    .notNull(),
+  role: text('role'),
   banned: integer('banned', { mode: 'boolean' }).default(false),
   banReason: text('ban_reason'),
   banExpires: integer('ban_expires', { mode: 'timestamp' }),

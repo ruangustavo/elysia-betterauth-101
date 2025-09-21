@@ -1,4 +1,7 @@
 import { accounts } from './accounts'
+import { invitations } from './invitations'
+import { members } from './members'
+import { organizations } from './organizations'
 import { sessions } from './sessions'
 import { users } from './users'
 import { verifications } from './verifications'
@@ -10,4 +13,7 @@ export default {
   users,
   verifications,
   watches,
+  organizations,
+  members,
+  invitations,
 }

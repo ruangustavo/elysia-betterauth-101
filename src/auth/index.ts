@@ -1,6 +1,11 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
-import { admin, createAuthMiddleware, openAPI } from 'better-auth/plugins'
+import {
+  admin,
+  createAuthMiddleware,
+  openAPI,
+  organization,
+} from 'better-auth/plugins'
 import { db } from '../db'
 import schema from '../db/schemas'
 
@@ -39,6 +44,7 @@ export const auth = betterAuth({
     admin({
       defaultRole: 'customer',
     }),
+    organization(),
   ],
 })
 
